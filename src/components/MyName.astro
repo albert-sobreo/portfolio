@@ -58,7 +58,9 @@
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         // If the element is in view, start the animations
-        startTyping()
+        setTimeout(()=>{
+          startTyping()
+        }, 500)
         startBlinking()
       } else {
         // If the element is out of view, stop the animations

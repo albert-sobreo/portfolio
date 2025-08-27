@@ -2,7 +2,7 @@
   <div class="flex flex-col">
     <div id="container2"
          class="outfit flex gap-0 text-4xl mg:text-6xl lg:text-8xl tracking-tighter font-semibold text-wrap">
-      <span id="works" class="text-stone-400">My Works</span>
+      <span id="works" class="text-stone-400"></span>
       <span id="underscore__" class="text-amber-500">_</span>
     </div>
   </div>
@@ -100,7 +100,9 @@
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         // If the element is in view, start the animations
-        startTyping()
+        setTimeout(()=>{
+          startTyping()
+        }, 500)
         startBlinking()
       } else {
         // If the element is out of view, stop the animations
