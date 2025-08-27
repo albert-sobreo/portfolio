@@ -1,0 +1,84 @@
+<div class="relative px-6 md:px-24 lg:px-48 xl:px-64 2xl:px-96 w-full h-screen flex flex-col items-start justify-start gap-24 py-8 my-48">
+  <div class="flex flex-col">
+    <div id="container4" class="outfit flex gap-0 text-4xl mg:text-6xl lg:text-8xl tracking-tighter font-semibold text-wrap">
+      <span id="tools" class="text-stone-400"></span>
+      <span id="underscore____" class="text-amber-500">_</span>
+    </div>
+  </div>
+  <div class="absolute inset-0 flex flex-col items-center justify-center w-full gap-8">
+    <span class="text-stone-500">Every great product requires a great tool</span>
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 items-center justify-center gap-8">
+      <img alt="" class="h-24 w-24 object-contain" src="/html.svg">
+      <img alt="" class="h-24 w-24 object-contain" src="/css.svg">
+      <img alt="" class="h-24 w-24 object-contain" src="/js.svg">
+      <img alt="" class="h-24 w-24 object-contain" src="/vue.svg">
+      <img alt="" class="h-24 w-24 object-contain" src="/react.svg">
+      <img alt="" class="h-24 w-24 object-contain" src="/figma.svg">
+      <img alt="" class="h-24 w-24 object-contain" src="/firebase.svg">
+      <img alt="" class="h-24 w-24 object-contain" src="/python.svg">
+      <img alt="" class="h-24 w-24 object-contain" src="/vite.svg">
+      <img alt="" class="h-24 w-24 object-contain" src="/astro.png">
+    </div>
+  </div>
+</div>
+
+<script>
+  const under = document.getElementById('underscore____')
+  const name = document.getElementById('tools')
+  const container = document.getElementById('container4')
+
+  const txt = 'Tools'
+  let index = 0
+  let text = []
+  let typingInterval:any
+  let blinkInterval:any
+
+  // Function to start the typing animation
+  const startTyping = () => {
+    if (typingInterval) return; // Prevent multiple intervals
+    typingInterval = setInterval(() => {
+      if (!name || index >= txt.length) {
+        clearInterval(typingInterval)
+        return
+      }
+      text.push(txt.split('')[index])
+      index++
+      name.innerHTML = text.join('')
+    }, 100)
+  }
+
+  // Function to start the blinking cursor
+  const startBlinking = () => {
+    if (blinkInterval) return; // Prevent multiple intervals
+    blinkInterval = setInterval(() => {
+      if (!under) return
+      if (under.classList.contains('text-white/0')) {
+        under.classList.remove('text-white/0')
+      } else {
+        under.classList.add('text-white/0')
+      }
+    }, 600)
+  }
+
+  // Create an Intersection Observer instance
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // If the element is in view, start the animations
+        startTyping()
+        startBlinking()
+      } else {
+        // If the element is out of view, stop the animations
+        clearInterval(typingInterval)
+        clearInterval(blinkInterval)
+        typingInterval = null
+        blinkInterval = null
+      }
+    })
+  })
+
+  // Start observing the container element
+  if (container) {
+    observer.observe(container)
+  }
+</script>
